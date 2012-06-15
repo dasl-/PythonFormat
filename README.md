@@ -3,7 +3,8 @@ PythonFormat is a python formatting plugin for Sublime Text 2.
 
 ## Features
 * Turns "double quotes" into 'single quotes' where possible
-* Adds spacing around mathematical operators. e.g. "print 2+-4/3" will become "print 2 + -4 / 3"
+* Adds spacing around mathematical operators. E.g. "print 2+-4/3" will become "print 2 + -4 / 3"
+* Adds spacing around syntactically valid statements . E.g. "do_method(arg1,arg2,arg3)" will become "do_method(arg1, arg2, arg3)". "if(True):" will become "if (True):" "print'Hello, World'" will become "print 'Hello World'"
 * Adds parentheses around if, elif, and while statements
 * Intelligently wraps lines enclosed in parentheses/braces/brackets
 * Intelligently wraps comments
