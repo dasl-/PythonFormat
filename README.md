@@ -8,7 +8,7 @@ PythonFormat is a python formatting plugin for Sublime Text 2.
 * Adds spacing around syntactically valid statements. 
 	- *do_method(arg1,arg2,arg3)* will become *do_method(arg1, arg2, arg3)* 
 	- *if(True):* will become *if (True):*
-	- *print'Hello, World'* will become *print 'Hello World'*
+	- *print'Hello, World'* will become *print 'Hello, World'*
 * Adds parentheses around if, elif, and while statements
 * Intelligently wraps lines enclosed in parentheses/braces/brackets
 * Intelligently wraps comments
