@@ -21,6 +21,61 @@ Clone this repository in to the Sublime Text 2 "Packages" directory, which is lo
 ## Usage
 The default key binding is "super+shift+f". Alternatively, you can do open the command pallette via "super+shift+p" and enter "Format: Python". This will format your entire opened file. Currently, there is no support for formatting of a highlighted selection.
 
+## Should I use PythonFormat or PythonTidy?
+I have another Sublime Text 2 plugin, called [SublimePythonTidy](https://github.com/davidleibovic/SublimePythonTidy). It is based on the formatting provided by the excellent [PythonTidy](http://pypi.python.org/pypi/PythonTidy) script. Here is a sample of how the formatting style compares (I personally happen to prefer the style used by PythonFormat).
+
+### Input:
+    if self.opts.max_preserve_newlines == 0 or self.opts.max_preserve_newlines > self.n_newlines:
+### PythonFormat Output:
+    if (self.opts.max_preserve_newlines == 0 or
+        self.opts.max_preserve_newlines > self.n_newlines):
+### SublimePythonTidy Output:
+    if self.opts.max_preserve_newlines == 0 \
+        or self.opts.max_preserve_newlines \
+        > self.n_newlines:
+
+### Input:
+    self.operators = ['!=', '%', '&', '*', '**', '+', '+=', '-=', '-', '/','//', '<', '<<', '<=', '~', '==', '=', '>', '>=', '>>','^', '|', '<>', '*=', '/=', '%=', '**=', '//=', '|=','&=', '^=']
+### PythonFormat Output:
+    self.operators = ['!=', '%', '&', '*', '**', '+', '+=', '-=', '-', '/',
+                      '//', '<', '<<', '<=', '~', '==', '=', '>', '>=', '>>',
+                      '^', '|', '<>', '*=', '/=', '%=', '**=', '//=', '|=',
+                      '&=', '^=']
+### SublimePythonTidy Output:
+	self.operators = [
+            '!=',
+            '%',
+            '&',
+            '*',
+            '**',
+            '+',
+            '+=',
+            '-=',
+            '-',
+            '/',
+            '//',
+            '<',
+            '<<',
+            '<=',
+            '~',
+            '==',
+            '=',
+            '>',
+            '>=',
+            '>>',
+            '^',
+            '|',
+            '<>',
+            '*=',
+            '/=',
+            '%=',
+            '**=',
+            '//=',
+            '|=',
+            '&=',
+            '^=',
+            ]
+
 ## Disclaimer
 PythonFormat has been tested, but it is still very new! There is a real chance it could screw up your files, so be careful, test, and save a backup.
 
