@@ -22,7 +22,11 @@ Clone this repository in to the Sublime Text 2 "Packages" directory, which is lo
 The default key binding is "super+shift+f". Alternatively, you can do open the command pallette via "super+shift+p" and enter "Format: Python". This will format your entire opened file. Currently, there is no support for formatting of a highlighted selection.
 
 ## Should I use PythonFormat or PythonTidy?
-I have another Sublime Text 2 plugin, called [SublimePythonTidy](https://github.com/davidleibovic/SublimePythonTidy). It is based on the formatting provided by the excellent [PythonTidy](http://pypi.python.org/pypi/PythonTidy) script. Here is a sample of how the formatting style compares (I personally happen to prefer the style used by PythonFormat).
+I have another Sublime Text 2 plugin, called [SublimePythonTidy](https://github.com/davidleibovic/SublimePythonTidy). It is based on the formatting provided by the excellent [PythonTidy](http://pypi.python.org/pypi/PythonTidy) script. 
+
+SublimePythonTidy will be more reliable and less likely to screw up your code, as it uses a more mature, better tested formatter. SublimePythonTidy works by parsing the abstract syntax tree of your Python code. As such, it requires the file being formatted to be valid Python syntax. If you forgot to insert a colon or some other symbol, SublimePythonTidy will not be able to run. PythonFormat, on the other hand, will still make an attempt at formatting your code, even if it is not valid Python syntax.
+
+Here is a sample of how the formatting style compares (I personally happen to prefer the style used by PythonFormat).
 
 ### Input:
     if self.opts.max_preserve_newlines == 0 or self.opts.max_preserve_newlines > self.n_newlines:
