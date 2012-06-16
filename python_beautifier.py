@@ -333,7 +333,6 @@ class Beautifier:
             self.append_token(token_text, 'TK_NEW_LINE')
 
     def handle_carriage_return(self, token_text):
-        print 'carriage!!!'
         self.append_token(token_text, 'TK_CARRIAGE_RETURN')
 
     def handle_open_paren(self, token_text):
@@ -485,11 +484,38 @@ class Beautifier:
             self.chars_since_new_line = 0
             self.line_indent_level = -1
         else:
-            self.chars_since_new_line += len(token_text)
+            if (token_type == 'TK_STRING_LITERAL'):
+                self.chars_since_new_line = self.get_string_literal_chars_since_new_line(
+                                                                                         token_text)
+            else:
+                self.chars_since_new_line += len(token_text)
 
     def pop(self):
         last_token = self.data.pop()
         self.chars_since_new_line -= len(last_token)
+
+    def get_string_literal_chars_since_new_line(self, token_text):
+        chars_since_new_line = 0
+
+        if (token_text.startswith("'''") or token_text.startswith('"""')):
+            new_line_index = -1
+            list_range = range(0, len(token_text))
+            list_range.reverse()
+            for i in list_range:
+                if (token_text[i] == '\n'):
+                    new_line_index = i
+                    break
+
+            if (new_line_index == -1):
+                chars_since_new_line = self.chars_since_new_line + len(
+                                                                       token_text)
+            else:
+                chars_since_new_line = len(token_text) - i - 1
+
+        else:
+            chars_since_new_line = self.chars_since_new_line + len(token_text)
+
+        return chars_since_new_line
 
 
 def beautify(input):
