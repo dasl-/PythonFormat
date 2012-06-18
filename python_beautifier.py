@@ -31,31 +31,31 @@ class Beautifier:
         self.tab_spaces = 4
         self.line_limit = 80
 
-        self.punctuation = [',']
-        self.operators = ['!=', '%', '&', '*', '**', '+', '+=', '-=', '-', '/',
+        self.punctuation = (',')
+        self.operators = ('!=', '%', '&', '*', '**', '+', '+=', '-=', '-', '/',
                           '//', '<', '<<', '<=', '~', '==', '=', '>', '>=', '>>',
                           '^', '|', '<>', '*=', '/=', '%=', '**=', '//=', '|=',
-                          '&=', '^=']
+                          '&=', '^=')
         # operators that should maybe or maybe not be followed by " "
-        self.operators_unary = ['+', '-', '~', '*', '**']
-        self.operators_maybe_pre_space = ['+', '-', '--', '++', '~']
-        self.spacing_tokens = ['TK_NEW_LINE', 'TK_CARRIAGE_RETURN',
-                               'TK_WHITE_SPACE']
-        self.spacing_characters = [' ', '\t', '\r', '\n']
-        self.newline_characters = ['\n', '\r']
-        self.white_space_characters = [' ', '\t']
-        self.open_characters = ['(', '[', '{']
-        self.close_characters = [')', ']', '}']
-        self.string_literal_characters = ["'", '"']
-        self.keywords = ['and', 'assert', 'break', 'class', 'continue', 'def',
+        self.operators_unary = ('+', '-', '~', '*', '**')
+        self.operators_maybe_pre_space = ('+', '-', '--', '++', '~')
+        self.spacing_tokens = ('TK_NEW_LINE', 'TK_CARRIAGE_RETURN',
+                               'TK_WHITE_SPACE')
+        self.spacing_characters = (' ', '\t', '\r', '\n')
+        self.newline_characters = ('\n', '\r')
+        self.white_space_characters = (' ', '\t')
+        self.open_characters = ('(', '[', '{')
+        self.close_characters = (')', ']', '}')
+        self.string_literal_characters = ("'", '"')
+        self.keywords = ('and', 'assert', 'break', 'class', 'continue', 'def',
                          'del', 'elif', 'else', 'except', 'exec', 'finally',
                          'for', 'from', 'global', 'if', 'import', 'in', 'is',
                          'lambda', 'not', 'or', 'pass', 'print', 'raise',
-                         'return', 'try', 'while', 'yield']
-        self.keywords_with_parens_and_colons = ['elif', 'if', 'while']
-        self.keywords_with_colons_and_no_parens = ['class', 'def', 'else',
+                         'return', 'try', 'while', 'yield')
+        self.keywords_with_parens_and_colons = ('elif', 'if', 'while')
+        self.keywords_with_colons_and_no_parens = ('class', 'def', 'else',
                                                    'except', 'finally', 'try',
-                                                   'for', 'lambda']
+                                                   'for', 'lambda')
 
     def beautify(self, input):
         self.input = input
@@ -117,7 +117,7 @@ class Beautifier:
 
             resulting_string_literal = [sep]
             can_replace_double_with_single = False
-            if sep in ['"', '"""']:
+            if (sep in ('"', '"""')):
                 can_replace_double_with_single = True
 
             if (parser_pos < len(self.input)):
@@ -209,8 +209,8 @@ class Beautifier:
             resulting_string = c
             while (parser_pos < len(self.input)):
                 c = self.input[parser_pos]
-                if (c not in ['"', "'", '!', ' ', '\t', '\r', '\n', '(', '[',
-                    '{', ')', ']', '}', '#', ':'] and c not in self.operators
+                if (c not in ('"', "'", '!', ' ', '\t', '\r', '\n', '(', '[',
+                    '{', ')', ']', '}', '#', ':') and c not in self.operators
                     and c not in self.punctuation):
                     resulting_string += c
                     parser_pos += 1
@@ -294,11 +294,11 @@ class Beautifier:
         self.append_token(token_text, 'TK_KEYWORD')
 
     def handle_white_space(self, token_text):
-        if self.last_token_type in ['TK_NEW_LINE', 'TK_CARRIAGE_RETURN']:
+        if (self.last_token_type in ('TK_NEW_LINE', 'TK_CARRIAGE_RETURN')):
             # we keep the previous last_token_type here because we want to
             # preserve all whitespace immediately following a new line.
             self.append_token(token_text, self.last_token_type)
-        elif self.last_token_type in ['TK_WHITE_SPACE', 'TK_OPEN_PAREN']:
+        elif (self.last_token_type in ('TK_WHITE_SPACE', 'TK_OPEN_PAREN')):
             pass
         elif (self.last_token_type == 'TK_COLON' and self.paren_type[
               self.paren_nested_level] == '['):
@@ -336,10 +336,10 @@ class Beautifier:
         self.append_token(token_text, 'TK_CARRIAGE_RETURN')
 
     def handle_open_paren(self, token_text):
-        if (self.last_last_token_type not in ['TK_OPERATOR', 'TK_KEYWORD'] and
+        if (self.last_last_token_type not in ('TK_OPERATOR', 'TK_KEYWORD') and
             self.last_token_type == 'TK_WHITE_SPACE'):
             self.pop()
-        if (self.last_token_type in ['TK_KEYWORD']):
+        if (self.last_token_type in ('TK_KEYWORD')):
             self.append_token(' ', 'TK_WHITE_SPACE')
 
         self.append_token(token_text, 'TK_OPEN_PAREN')
@@ -463,7 +463,7 @@ class Beautifier:
         if (self.chars_since_new_line + len(token_text) > self.line_limit and
             self.paren_nested_level > 0 and self.wrap_inside_parens):
             # wrap only on these tokens
-            if (token_type in ['TK_STRING_LITERAL', 'TK_OTHER', 'TK_KEYWORD']):
+            if (token_type in ('TK_STRING_LITERAL', 'TK_OTHER', 'TK_KEYWORD')):
                 self.handle_new_line('\nFORCE')
                 # We wrap to align with the outter most paren block. If we were
                 # instead to wrap to
